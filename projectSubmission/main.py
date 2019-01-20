@@ -1,4 +1,3 @@
-
 from tkinter import *
 import Untitled3
 import pickle
@@ -68,7 +67,7 @@ class Graph:
  
  
     def dijkstra(self, source, dest):
-        assert source in self.vertices, 'Such source node doesn\'t exist'
+        # assert source in self.vertices, 'Such source node doesn\'t exist'
         
 
         # 1. Mark all nodes unvisited and store them.
@@ -283,90 +282,89 @@ while True:
   
     choice=input("Create or Navigate?")
     if choice=="Create":
-         run(700,600)
-    elif choice=="Navigate":
-         print("Click on the black block on the extreme right and mark your location on the grid")
         run(700,600)
-          CarLocation_x=-1
-          CarLocation_y=-1
-          CarLocation=(CarLocation_x,CarLocation_y)
-          for x in range(10):
-              for y in range(9):
-                  if Untitled3.blocks[x][y]=='black':
-                      CarLocation_x=x
-                      CarLocation_y=y
-                      CarLocation=(CarLocation_x,CarLocation_y)
+    elif choice=="Navigate":
+        print("Click on the black block on the extreme right and mark your location on the grid")
+        run(700,600)
+          
+        CarLocation_x=-1
+        CarLocation_y=-1
+        CarLocation=(CarLocation_x,CarLocation_y)
+        for x in range(10):
+            for y in range(9):
+                if Untitled3.blocks[x][y]=='black':
+                    CarLocation_x=x
+                    CarLocation_y=y
+                    CarLocation=(CarLocation_x,CarLocation_y)
 
-                      node_list = []
-                      valid_list = []
-                      node_list_final = []
-                      green_list = []
-                      Start_End = []
-                      Start_End_len = []
-                      Start_End_index = []
-
-
-                      for row in range(len(Untitled3.blocks)):
-                          for col in range(len(Untitled3.blocks[0])-1):
-                              if Untitled3.blocks[row][col] == 'grey' or Untitled3.blocks[row][col] == 'green':
-                                  valid_list.append((row,col))
-
-                      #simple sort function to find all the paths
-                      path_list = []
-                      for i in range(len(valid_list)-1):
-                          
-                          for j in range(1+i, len(valid_list)):
-                               
-                              if (abs(valid_list[i][0] - valid_list[j][0])==1 and valid_list[i][1] - valid_list[j][1]== 0) or (abs(valid_list[i][1] - valid_list[j][1])==1 and valid_list[i][0] - valid_list[j][0]== 0):
-                                  node_list.append(((valid_list[i]),(valid_list[j])))
-
-                      for i in range(len(node_list)):
-                          node_list_final.append((node_list[i][0],node_list[i][1], 1))
-
-                      for row in range(len(Untitled3.blocks)):
-                          for col in range(len(Untitled3.blocks[0])-1):
-                              if Untitled3.blocks[row][col] == 'green':
-                                  green_list.append((row,col))
+                    node_list = []
+                    valid_list = []
+                    node_list_final = []
+                    green_list = []
+                    Start_End = []
+                    Start_End_len = []
+                    Start_End_index = []
 
 
-                      #print(graph.dijkstra(CarLocation, green_list[1]))
+                    for row in range(len(Untitled3.blocks)):
+                        for col in range(len(Untitled3.blocks[0])-1):
+                            if Untitled3.blocks[row][col] == 'grey' or Untitled3.blocks[row][col] == 'green':
+                                valid_list.append((row,col))
+
+                    #simple sort function to find all the paths
+                    path_list = []
+                    for i in range(len(valid_list)-1):
+                        
+                        for j in range(1+i, len(valid_list)):
+                            
+                            if (abs(valid_list[i][0] - valid_list[j][0])==1 and valid_list[i][1] - valid_list[j][1]== 0) or (abs(valid_list[i][1] - valid_list[j][1])==1 and valid_list[i][0] - valid_list[j][0]== 0):
+                                node_list.append(((valid_list[i]),(valid_list[j])))
+
+                    for i in range(len(node_list)):
+                        node_list_final.append((node_list[i][0],node_list[i][1], 1))
+
+                    for row in range(len(Untitled3.blocks)):
+                        for col in range(len(Untitled3.blocks[0])-1):
+                            if Untitled3.blocks[row][col] == 'green':
+                                green_list.append((row,col))
+
+
+                    #print(graph.dijkstra(CarLocation, green_list[1]))
 
 
 
-                      for i in range(len(green_list)):
-                          Start_End.append((CarLocation, green_list[i]))
+                    for i in range(len(green_list)):
+                        Start_End.append((CarLocation, green_list[i]))
 
-                      graph = Graph(node_list_final)
+                    graph = Graph(node_list_final)
 
-                      for i in range(len(Start_End)):
-                          Start_End_index.append(i)
-                          graph = Graph(node_list_final)
-                          Start_End_len.append(len((graph.dijkstra(CarLocation, green_list[i]))))
-                      #print(Start_End_len)
+                    for i in range(len(Start_End)):
+                        Start_End_index.append(i)
+                        graph = Graph(node_list_final)
+                        Start_End_len.append(len((graph.dijkstra(CarLocation, green_list[i]))))
+                    #print(Start_End_len)
 
-                      for passnum in range(len(Start_End_len)-1):
-                          swapped = False
-                          for i in range(len(Start_End_len)-1):
-                              if Start_End_len[i]<Start_End_len[i+1]:
-                                  temp = Start_End_len[i]
-                                  Start_End_len[i]= Start_End_len[i+1]
-                                  Start_End_len[i+1]= temp
+                    for passnum in range(len(Start_End_len)-1):
+                        swapped = False
+                        for i in range(len(Start_End_len)-1):
+                            if Start_End_len[i]<Start_End_len[i+1]:
+                                temp = Start_End_len[i]
+                                Start_End_len[i]= Start_End_len[i+1]
+                                Start_End_len[i+1]= temp
 
-                                  const = Start_End_index[i]
-                                  Start_End_index[i]= Start_End_index[i+1]
-                                  Start_End_index[i+1]= const
-                                  swapped= True
-                          if not swapped:
-                              break
+                                const = Start_End_index[i]
+                                Start_End_index[i]= Start_End_index[i+1]
+                                Start_End_index[i+1]= const
+                                swapped= True
+                        if not swapped:
+                            break
 
-                      Target_block = Start_End[Start_End_index[0]][1]
+                    Target_block = Start_End[Start_End_index[0]][1]
 
-                      print("The closest parking space to you is: ",Target_block)                                #Closest available parking lot
-                      graph = Graph(node_list_final)
-                      print(graph.dijkstra(CarLocation, Target_block))   #path    
-           
+                    print("The closest parking space to you is: ",Target_block)                                #Closest available parking lot
+                    # graph = Graph(node_list_final)
+                    # print(graph.dijkstra(CarLocation, Target_block))   #path    
+        
         
     else:
       break
-        
-
