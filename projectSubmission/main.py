@@ -67,7 +67,7 @@ class Graph:
  
  
     def dijkstra(self, source, dest):
-        # assert source in self.vertices, 'Such source node doesn\'t exist'
+        assert source in self.vertices, 'Such source node doesn\'t exist'
         
 
         # 1. Mark all nodes unvisited and store them.
@@ -308,7 +308,7 @@ while True:
 
                     for row in range(len(Untitled3.blocks)):
                         for col in range(len(Untitled3.blocks[0])-1):
-                            if Untitled3.blocks[row][col] == 'grey' or Untitled3.blocks[row][col] == 'green':
+                            if Untitled3.blocks[row][col] == 'grey' or Untitled3.blocks[row][col] == 'green' or Untitled3.blocks[row][col] == 'black':
                                 valid_list.append((row,col))
 
                     #simple sort function to find all the paths
@@ -362,8 +362,8 @@ while True:
                     Target_block = Start_End[Start_End_index[0]][1]
 
                     print("The closest parking space to you is: ",Target_block)                                #Closest available parking lot
-                    # graph = Graph(node_list_final)
-                    # print(graph.dijkstra(CarLocation, Target_block))   #path    
+                    graph = Graph(node_list_final)
+                    print(graph.dijkstra(CarLocation, Target_block))   #path    
         
         
     else:
