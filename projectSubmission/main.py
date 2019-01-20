@@ -216,7 +216,7 @@ def run(width=300, height=300):
                     canvas.create_text(575, 315, text="Vacant",font="Arial 13 bold", fill="black")
                     canvas.create_text(575, 285, text="Blank",font="Arial 13 bold", fill="black")
                     canvas.create_text(575, 360, text="Full",font="Arial 13 bold", fill="black")
-                    canvas.create_text(575, 400, text="Locn",font="Arial 13 bold", fill="white")
+                    canvas.create_text(575, 400, text="Locn",font="Arial 13 bold", fill="black")
                     pickle_out = open("Untitled3.blocks", "wb")
                     pickle.dump(Untitled3.blocks, pickle_out)
                     pickle_out.close()
@@ -284,7 +284,7 @@ while True:
     if choice=="Create":
         run(700,600)
     elif choice=="Navigate":
-        print("Click on the black block on the extreme right and mark your location on the grid")
+        print("Click on the black with 'LOCN' on the extreme right and mark your location on the grid")
         run(700,600)
           
         CarLocation_x=-1
